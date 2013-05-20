@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TinCanJava-Offline:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TinCanJava_Offline_jar</output-path>
+    <root id="archive" name="TinCanJava-Offline.jar">
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/slf4j-api-1.7.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/slf4j-jdk14-1.7.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/tincan-0.3.1-SNAPSHOT-jar-with-dependencies-jarjar.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/out/production/TinCanJava-Offline/classes.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
