@@ -4,14 +4,18 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
- * Created with IntelliJ IDEA.
- * User: USER
+ * TCLocalStorageDatabase - Provides access to the local db storage for statement and state storage
+ * @author Derek Clark
+ * @author Brian Rogers
  * Date: 5/8/13
- * Time: 12:07 PM
- * To change this template use File | Settings | File Templates.
+ *
+ * Copyright 2013 Rustici Software
+ *
  */
 
-//Definitions for the database structures
+/**
+ * Definitions for the database structures
+ */
 public final class TCLocalStorageDatabase {
 
     public static final String AUTHORITY = "com.rs.TCLocalStorageDatabase";

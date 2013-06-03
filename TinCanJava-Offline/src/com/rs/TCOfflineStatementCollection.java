@@ -15,11 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: USER
+ * TCOfflineStatementCollection - Provides a simple collection of statements for local persist and remote posting
+ * @author Derek Clark
+ * @author Brian Rogers
  * Date: 5/8/13
- * Time: 12:59 PM
- * To change this template use File | Settings | File Templates.
+ *
+ * Copyright 2013 Rustici Software
+ *
  */
 public class TCOfflineStatementCollection extends Activity {
 
@@ -33,13 +35,19 @@ public class TCOfflineStatementCollection extends Activity {
         _statementArray = new ArrayList<Statement>();
     }
 
-    //interface for completion notification for addStatement
+    /**
+     * interface for completion notification for addStatement
+     */
     public interface addStatementInterface {
         void completionBlock();
         void errorBlock(String error);
     }
 
-    //takes a statement and adds it to the local database
+    /**
+     * addStatement takes a statement and adds it to the local database
+     * @param statement
+     * @param addInterface
+     */
     public void addStatement(Statement statement, addStatementInterface addInterface)
     {
         _statementArray.add(statement);
@@ -73,6 +81,10 @@ public class TCOfflineStatementCollection extends Activity {
         addInterface.completionBlock();
     }
 
+    /**
+     * Returns a JSON formatted string of the collection's contents
+     * @return json string of all statements in collection
+     */
     String JSONString()
     {
         JSONArray array = new JSONArray();
@@ -93,7 +105,10 @@ public class TCOfflineStatementCollection extends Activity {
         return returnString;
     }
 
-    //return a list of all local statements from db
+    /**
+     * return a list of all local statements from db
+     * @return List of LocalStatementsItem
+     */
     public List<LocalStatementsItem> getCachedStatements()
     {
         List<LocalStatementsItem> statementArray = new ArrayList<LocalStatementsItem>();
@@ -126,7 +141,11 @@ public class TCOfflineStatementCollection extends Activity {
     }
 
 
-    //get all statements that haven't been posted
+    /**
+     * get all statements that haven't been posted
+     * @param limit
+     * @return List of LocalStatementsItem
+     */
     List<LocalStatementsItem> getUnsentStatements(int limit)
     {
         List<LocalStatementsItem> statementArray = new ArrayList<LocalStatementsItem>();
@@ -171,7 +190,10 @@ public class TCOfflineStatementCollection extends Activity {
 
     }
 
-    //delete a statement from the db after it has been posted
+    /**
+     * delete a statement from the db after it has been posted
+     * @param statementPosted
+     */
     public void markStatementPosted(Statement statementPosted)
     {
         String statementId = statementPosted.getId().toString();

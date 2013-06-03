@@ -18,18 +18,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * Created with IntelliJ IDEA.
- * User: USER
+/** RSTinCanOfflineConnector is the entry point for interacting with the Offline SDK. Provided here are methods
+ * to save statements and state locally and flush stored data to the LRS when connected
+ *
+ * @author Derek Clark
+ * @author Brian Rogers
  * Date: 5/8/13
- * Time: 12:58 PM
- * To change this template use File | Settings | File Templates.
+ *
+ * Copyright 2013 Rustici Software
+ *
  */
 public class RSTinCanOfflineConnector extends Activity {
 
     Context appContext;
     List<Map<String,String>> _recordStore = new ArrayList<Map<String,String>>();
 
+    /**
+     * Create new connector with options and context
+     * @param options - should contain 'recordStore' option with LRS, Auth and Version
+     * @param context
+     */
     public RSTinCanOfflineConnector(Map<String,Object> options, Context context)
     {
         appContext = context;
@@ -41,7 +49,12 @@ public class RSTinCanOfflineConnector extends Activity {
         void errorBlock(String error);
     }
 
-    //send a statement
+    /** sendStatementToServer(Statement statementToSend, sendStatementInterface sendInterface)
+     *
+     * @param statementToSend	The Statement that you want to send to the LRS
+     * @param sendInterface     The callback interface for completion
+     *
+     */
     void sendStatementToServer(Statement statementToSend, sendStatementInterface sendInterface)
     {
         new sendStatementToServerAsync().execute(statementToSend,sendInterface);
@@ -49,7 +62,10 @@ public class RSTinCanOfflineConnector extends Activity {
 
 
 
-    //send a statement to lrs async
+    /** sendStatementToServerAsync() provides the async connection to post the statement
+     *
+     * @extends AsyncTask
+     */
     class sendStatementToServerAsync extends AsyncTask<Object, Integer, Boolean> {
 
         Exception myE = null;
@@ -115,6 +131,13 @@ public class RSTinCanOfflineConnector extends Activity {
         return returnString;
     }
 
+    /**
+     * stringByAddingPercentEscapesUsingEncoding( String input, String charset ) is a port of the iOS utility of the same name
+     * @param input
+     * @param charset
+     * @return string result
+     * @throws UnsupportedEncodingException
+     */
     public static String stringByAddingPercentEscapesUsingEncoding( String input, String charset ) throws UnsupportedEncodingException {
         byte[] bytes = input.getBytes(charset);
         StringBuilder sb = new StringBuilder(bytes.length);
@@ -136,6 +159,11 @@ public class RSTinCanOfflineConnector extends Activity {
         return sb.toString();
     }
 
+    /**
+     * stringByAddingPercentEscapesUsingEncoding( String input )
+     * @param input
+     * @return string result
+     */
     public static String stringByAddingPercentEscapesUsingEncoding( String input ) {
         try {
             return stringByAddingPercentEscapesUsingEncoding(input, "UTF-8");
@@ -145,7 +173,11 @@ public class RSTinCanOfflineConnector extends Activity {
         }
     }
 
-    //get querystring for the state
+    /**
+     * querystring for the state
+     * @param state
+     * @return querystring for state put
+     */
     String querystring(State state)
     {
         String returnString;
@@ -166,7 +198,16 @@ public class RSTinCanOfflineConnector extends Activity {
         return returnString;
     }
 
-    //save a state to the local db
+    /**
+     * setStateWithValue - save the state to the local DB
+     * @param value
+     * @param stateId
+     * @param activityId
+     * @param agent
+     * @param registration
+     * @param options
+     * @param stateInterface
+     */
     public void setStateWithValue(Map<String,String> value, String stateId, String activityId, Agent agent, String registration, Map<String, Object> options, setStateInterface stateInterface)
     {
         State state;
@@ -219,14 +260,23 @@ public class RSTinCanOfflineConnector extends Activity {
         stateInterface.completionBlock();
     }
 
-    //add a statement to the local db
+    /**
+     * enqueueStatement - save a statement to the local db
+     * @param statement
+     * @param addInterface
+     */
     public void enqueueStatement(Statement statement, addStatementInterface addInterface)
     {
         TCOfflineStatementCollection statementQueue = new TCOfflineStatementCollection(appContext);
         statementQueue.addStatement(statement, addInterface);
     }
 
-    //get a list of local statements
+    //
+
+    /**
+     * get a list of local statements
+     * @return List of LocalStatementsItem
+     */
     public List<LocalStatementsItem> getCachedStatements()
     {
         TCOfflineStatementCollection statementQueue = new TCOfflineStatementCollection(appContext);
@@ -238,7 +288,10 @@ public class RSTinCanOfflineConnector extends Activity {
         void errorBlock(String error);
     }
 
-    //send the oldest statement in the local queue to the db
+    /**
+     * send the oldest statement in the local queue to the db
+     * @param sendInterface
+     */
     public void sendOldestStatementFromQueueWithCompletionBlock(final sendOldestInterface sendInterface)
     {
 
@@ -285,7 +338,11 @@ public class RSTinCanOfflineConnector extends Activity {
 
     }
 
-    //get a list of the local state items from local db
+    /**
+     * get a list of the local state items from local db
+     * @param limit
+     * @return List of LocalStateItem
+     */
     List<LocalStateItem> getLocalStates(int limit)
     {
         List<LocalStateItem> stateArray = new ArrayList<LocalStateItem>();
@@ -326,14 +383,19 @@ public class RSTinCanOfflineConnector extends Activity {
         void errorBlock(String error);
     }
 
-    //send local states to lrs
+    /**
+     * send local states to lrs
+     * @param sendLocalInterface
+     */
     public void sendLocalStateToServerWithCompletionBlock(sendLocalStateInterface sendLocalInterface)
     {
         new sendLocalStateToServerAsync().execute(sendLocalInterface);
 
     }
 
-    //send local states to lrs async
+    /**
+     *  send local states to lrs async
+     */
     class sendLocalStateToServerAsync extends AsyncTask<Object, Integer, Boolean> {
 
         Exception myE = null;
