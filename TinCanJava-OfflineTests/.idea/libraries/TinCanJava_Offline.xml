@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="TinCanJava-Offline">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../TinCanJava-Offline/out/artifacts/TinCanJava_Offline_jar/TinCanJava-Offline.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
