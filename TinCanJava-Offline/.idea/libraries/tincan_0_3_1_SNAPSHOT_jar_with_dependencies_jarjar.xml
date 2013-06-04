@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="tincan-0.3.1-SNAPSHOT-jar-with-dependencies-jarjar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/tincan-0.3.1-SNAPSHOT-jar-with-dependencies-jarjar.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
