@@ -32,6 +32,8 @@ public class RSTinCanOfflineConnector extends Activity {
 
     Context appContext;
     List<Map<String,String>> _recordStore = new ArrayList<Map<String,String>>();
+    List<LocalStateItem> _stateToDelete = new ArrayList<LocalStateItem>();
+    List<Statement> _statementsToDelete = new ArrayList<Statement>();
 
     /**
      * Create new connector with options and context
@@ -59,8 +61,6 @@ public class RSTinCanOfflineConnector extends Activity {
     {
         new sendStatementToServerAsync().execute(statementToSend,sendInterface);
     }
-
-
 
     /** sendStatementToServerAsync() provides the async connection to post the statement
      *
@@ -96,6 +96,7 @@ public class RSTinCanOfflineConnector extends Activity {
             }
             catch (Exception e)
             {
+                myE = e;
                 return true;
             }
 
@@ -116,6 +117,376 @@ public class RSTinCanOfflineConnector extends Activity {
                 mySendInterface.completionBlock();
             }
         }
+    }
+
+    public interface getStatementInterface {
+        void completionBlock(Statement statement);
+        void errorBlock(String error);
+    }
+
+    /** getStatementWithId(String statementId, getStatementInterface getInterface)
+     *
+     * @param statementId	The ID of the Statement that you want to get from the LRS
+     * @param getInterface     The callback interface for completion
+     *
+     */
+    public void getStatementWithId(String statementId, getStatementInterface getInterface)
+    {
+        new getStatementWithIdAsync().execute(statementId,getInterface);
+    }
+
+
+    /** getStatementWithIdAsync() provides the async connection to get a statement
+     *
+     * @extends AsyncTask
+     */
+    class getStatementWithIdAsync extends AsyncTask<Object, Integer, Boolean> {
+
+        Exception myE = null;
+        getStatementInterface myGetInterface;
+        Statement statement = null;
+
+
+        @Override
+        protected Boolean doInBackground(Object... info) {              //background function
+
+            myGetInterface = (getStatementInterface)info[1];
+
+            RemoteLRS lrs = new RemoteLRS();                                  //get the lrs
+            try {
+                lrs.setEndpoint(_recordStore.get(0).get("endpoint"));
+                lrs.setAuth(_recordStore.get(0).get("auth"));
+                lrs.setVersion(TCAPIVersion.fromString(_recordStore.get(0).get("version")));
+            }
+            catch (Exception e)
+            {
+                myE = e;
+                return true;
+            }
+
+            try {
+
+                String statementId = (String)info[0];
+                statement = lrs.retrieveStatement(statementId);                                  //send statement
+            }
+            catch (Exception e)
+            {
+                myE = e;
+                return true;
+            }
+
+            return false;   //success
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Boolean failure) {
+
+            if (failure)
+            {
+                myGetInterface.errorBlock(myE.toString());
+            }
+            else
+            {
+                myGetInterface.completionBlock(statement);
+            }
+        }
+    }
+
+
+    public interface sendStatementsInterface {
+        void completionBlock();
+        void errorBlock(String error);
+    }
+
+    /** sendStatementsToServer(List<Statement> statementArray, sendStatementsInterface sendInterface)
+     *
+     * @param statementArray	The array of Statements array that you want to send to the LRS
+     * @param sendInterface     The callback interface for completion
+     *
+     */
+    void sendStatementsToServer(List<Statement> statementArray, sendStatementsInterface sendInterface)
+    {
+        new sendStatementsToServerAsync().execute(statementArray,sendInterface);
+    }
+
+
+
+    /** sendStatementsToServerAsync() provides the async connection to post an array of statements
+     *
+     * @extends AsyncTask
+     */
+    class sendStatementsToServerAsync extends AsyncTask<Object, Integer, Boolean> {
+
+        Exception myE = null;
+        sendStatementsInterface mySendInterface;
+
+
+        @Override
+        protected Boolean doInBackground(Object... info) {              //background function
+
+            mySendInterface = (sendStatementsInterface)info[1];
+
+            RemoteLRS lrs = new RemoteLRS();                                  //get the lrs
+            try {
+                lrs.setEndpoint(_recordStore.get(0).get("endpoint"));
+                lrs.setAuth(_recordStore.get(0).get("auth"));
+                lrs.setVersion(TCAPIVersion.fromString(_recordStore.get(0).get("version")));
+            }
+            catch (Exception e)
+            {
+                myE = e;
+                return true;
+            }
+
+            try {
+
+                List<Statement> statementArray = (List<Statement>)info[0];
+                lrs.saveStatements(statementArray);                                  //send statement
+            }
+            catch (Exception e)
+            {
+                myE = e;
+                return true;
+            }
+
+            return false;   //success
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Boolean failure) {
+
+            if (failure)
+            {
+                mySendInterface.errorBlock(myE.toString());
+            }
+            else
+            {
+                mySendInterface.completionBlock();
+            }
+        }
+    }
+
+
+    public interface getStatementsInterface {
+        void completionBlock(StatementsResult result);
+        void errorBlock(String error);
+    }
+
+    /** getStatementsFromServerWithOptions(StatementsQueryInterface query, getStatementsInterface getInterface)
+     *
+     * @param query	The StatementsQueryInterface to send to the LRS
+     * @param getInterface     The callback interface for completion
+     *
+     */
+    public void getStatementsFromServerWithOptions(StatementsQueryInterface query, getStatementsInterface getInterface)
+    {
+        new getStatementsFromServerAsync().execute(query,getInterface);
+    }
+
+    /** getStatementsFromServerAsync() provides the async connection to get an array of statements
+     *
+     * @extends AsyncTask
+     */
+    class getStatementsFromServerAsync extends AsyncTask<Object, Integer, Boolean> {
+
+        Exception myE = null;
+        getStatementsInterface myGetInterface;
+        StatementsResult result = null;
+
+        @Override
+        protected Boolean doInBackground(Object... info) {              //background function
+
+            myGetInterface = (getStatementsInterface)info[1];
+
+            RemoteLRS lrs = new RemoteLRS();                                  //get the lrs
+            try {
+                lrs.setEndpoint(_recordStore.get(0).get("endpoint"));
+                lrs.setAuth(_recordStore.get(0).get("auth"));
+                lrs.setVersion(TCAPIVersion.fromString(_recordStore.get(0).get("version")));
+            }
+            catch (Exception e)
+            {
+                myE = e;
+                return true;
+            }
+
+            try {
+
+                StatementsQueryInterface query = (StatementsQueryInterface)info[0];
+                result = lrs.queryStatements(query);                                  //get statements
+            }
+            catch (Exception e)
+            {
+                myE = e;
+                return true;
+            }
+
+            return false;   //success
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Boolean failure) {
+
+            if (failure)
+            {
+                myGetInterface.errorBlock(myE.toString());
+            }
+            else
+            {
+                myGetInterface.completionBlock(result);
+            }
+        }
+    }
+
+    public interface getStateInterface {
+        void completionBlock(State state);
+        void errorBlock(String error);
+    }
+
+    /** getStateFromServerWithStateId(String stateId, String activityId, Agent agent, String registration, getStateInterface getInterface)
+     *
+     * @param stateId	The ID of the State that you want to get from the LRS
+     * @param activityId	The activityId of the State that you want to get from the LRS
+     * @param agent	    The Agent of the State that you want to get from the LRS
+     * @param registration	The UUID registration of the State that you want to get from the LRS
+     * @param getInterface     The callback interface for completion
+     *
+     */
+    public void getStateFromServerWithStateId(String stateId, String activityId, Agent agent, String registration, getStateInterface getInterface)
+    {
+        new getStatementWithIdAsync().execute(stateId, activityId, agent, registration ,getInterface);
+    }
+
+
+    /** getStateFromServerWithStateIdAsync() provides the async connection to get a State
+     *
+     * @extends AsyncTask
+     */
+    class getStateFromServerWithStateIdAsync extends AsyncTask<Object, Integer, Boolean> {
+
+        Exception myE = null;
+        getStateInterface myGetInterface;
+        State state = null;
+
+
+        @Override
+        protected Boolean doInBackground(Object... info) {              //background function
+
+            myGetInterface = (getStateInterface)info[4];
+
+            RemoteLRS lrs = new RemoteLRS();                                  //get the lrs
+            try {
+                lrs.setEndpoint(_recordStore.get(0).get("endpoint"));
+                lrs.setAuth(_recordStore.get(0).get("auth"));
+                lrs.setVersion(TCAPIVersion.fromString(_recordStore.get(0).get("version")));
+            }
+            catch (Exception e)
+            {
+                myE = e;
+                return true;
+            }
+
+            try {
+
+                String stateId = (String)info[0];
+                String activityId = (String)info[1];
+                Agent agent = (Agent)info[2];
+                String registration = (String)info[3];
+
+                state = lrs.retrieveState(stateId, activityId, agent, UUID.fromString(registration));                                  //send statement
+            }
+            catch (Exception e)
+            {
+                myE = e;
+                return true;
+            }
+
+            return false;   //success
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Boolean failure) {
+
+            if (failure)
+            {
+                myGetInterface.errorBlock(myE.toString());
+            }
+            else
+            {
+                myGetInterface.completionBlock(state);
+            }
+        }
+    }
+
+
+
+    public interface getLocalStateInterface {
+        void completionBlock(StringOfJSON jsonState);
+        void errorBlock(String error);
+    }
+
+    /** getLocalStateForStateId(String stateId, getLocalStateInterface getInterface)
+     *
+     * @param stateId	The ID of the local state
+     * @param getInterface     The callback interface for completion
+     *
+     */
+
+    public void getLocalStateForStateId(String stateId, getLocalStateInterface getInterface)
+    {
+        Cursor cursor;
+        SQLiteDatabase database;
+        TCOfflineDataManager.TCLocalStorageDatabaseOpenHelper dbHelper;
+        dbHelper = new TCOfflineDataManager.TCLocalStorageDatabaseOpenHelper(appContext);
+        database = dbHelper.getWritableDatabase();
+
+        String select = TCLocalStorageDatabase.LocalState.STATE_ID + "=" + "\'" + stateId + "\'";
+
+        cursor = database.query(TCOfflineDataManager.LOCAL_STATE_TABLE_NAME, null, select, null, null, null, TCLocalStorageDatabase.LocalState.CREATE_DATE + " DESC", Integer.toString(1));      //query for all the unposted statements
+
+        if (cursor.getCount() <=0)
+        {
+            getInterface.errorBlock("no state with that stateId");
+            return;
+        }
+
+        cursor.moveToFirst();     //go to the beginning of the query and then loop through all the packages, adding them to the return List
+
+        LocalStateItem thisPackage = new LocalStateItem();
+        thisPackage.id = cursor.getInt(0);
+        thisPackage.stateId = cursor.getString(cursor.getColumnIndex("stateId"));
+        thisPackage.stateContents = cursor.getString(cursor.getColumnIndex("stateContents"));
+        thisPackage.createDate = cursor.getLong(cursor.getColumnIndex("createDate"));
+        thisPackage.postDate = cursor.getLong(cursor.getColumnIndex("postDate"));
+        thisPackage.querystring = cursor.getString(cursor.getColumnIndex("querystring"));
+        thisPackage.activityId = cursor.getString(cursor.getColumnIndex("activityId"));
+        thisPackage.agentJson = cursor.getString(cursor.getColumnIndex("agentJson"));
+
+        cursor.close();
+        database.close();
+
+
+        StringOfJSON state = null;
+        try
+        {
+            state = new StringOfJSON(thisPackage.stateContents);
+        }
+        catch (Exception e)
+        {
+            getInterface.errorBlock("StringOfJSON error");
+        }
+
+        getInterface.completionBlock(state);
+
+
     }
 
     public interface setStateInterface {
@@ -334,7 +705,54 @@ public class RSTinCanOfflineConnector extends Activity {
             sendInterface.errorBlock("no unsent statements");
         }
 
+    }
 
+
+    public interface sendAllInterface {
+        void completionBlock();
+        void errorBlock(String error);
+    }
+
+
+    public void sendAllStatementsToServerWithCompletionBlock(final sendAllInterface sendInterface)
+    {
+        final TCOfflineStatementCollection statementQueue = new TCOfflineStatementCollection(appContext);
+        List<LocalStatementsItem> unsentStatements = statementQueue.getUnsentStatements(500);
+
+        List<Statement> statementCollectionToSend = new ArrayList<Statement>();
+
+        for(int i=0; i<unsentStatements.size(); i++)
+        {
+            LocalStatementsItem item = unsentStatements.get(i);
+            try
+            {
+                Statement statementToSend = new Statement(new StringOfJSON(item.statementJson));
+                statementCollectionToSend.add(statementToSend);
+                _statementsToDelete.add(statementToSend);
+
+            }
+            catch (Exception e)
+            {
+                sendInterface.errorBlock(e.toString());
+            }
+        }
+
+        sendStatementsToServer(statementCollectionToSend, new sendStatementsInterface() {
+            @Override
+            public void completionBlock() {
+                for(int i=_statementsToDelete.size()-1; i>=0;i--)
+                {
+                    Statement statementSent = _statementsToDelete.get(i);
+                    statementQueue.markStatementPosted(statementSent);
+                }
+                sendInterface.completionBlock();
+            }
+
+            @Override
+            public void errorBlock(String error) {
+                sendInterface.errorBlock(error);
+            }
+        });
 
     }
 
@@ -378,6 +796,38 @@ public class RSTinCanOfflineConnector extends Activity {
 
     }
 
+    /** deleteSendStateRowsWithCompletionBlock()
+     *
+     *  deletes the States from the local DC and the array holding them
+     *
+     */
+    void deleteSendStateRowsWithCompletionBlock()
+    {
+
+        SQLiteDatabase database;
+        TCOfflineDataManager.TCLocalStorageDatabaseOpenHelper dbHelper;
+        dbHelper = new TCOfflineDataManager.TCLocalStorageDatabaseOpenHelper(appContext);
+        database = dbHelper.getWritableDatabase();
+
+
+        for (int i = _stateToDelete.size()-1; i>=0; i--)
+        {
+            LocalStateItem item = _stateToDelete.get(i);
+            String stateId = item.stateId;
+
+            String select = TCLocalStorageDatabase.LocalState.STATE_ID + "=" + "\'" + stateId + "\'";
+            int count = database.delete(TCOfflineDataManager.LOCAL_STATE_TABLE_NAME,select,null);
+            if (count>0)
+            {
+                _stateToDelete.remove(i);
+            }
+        }
+
+        database.close();
+        dbHelper.close();
+
+    }
+
     public interface sendLocalStateInterface {
         void completionBlock();
         void errorBlock(String error);
@@ -418,6 +868,8 @@ public class RSTinCanOfflineConnector extends Activity {
                 return true;
             }
 
+
+
             for(int i=0; i<stateArray.size();i++)
             {
                 LocalStateItem stateFromDb = stateArray.get(i);
@@ -433,6 +885,7 @@ public class RSTinCanOfflineConnector extends Activity {
                 }
                 try
                 {
+                    _stateToDelete.add(stateFromDb);
                     lrs.saveState(state, state.getActivityId().toString(),state.getAgent(),null);
                 }
                 catch (Exception e)
@@ -454,6 +907,7 @@ public class RSTinCanOfflineConnector extends Activity {
             }
             else
             {
+                deleteSendStateRowsWithCompletionBlock();
                 mySendInterface.completionBlock();
             }
         }
