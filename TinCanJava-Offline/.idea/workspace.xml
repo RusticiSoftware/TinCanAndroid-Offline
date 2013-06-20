@@ -72,7 +72,7 @@
           <file leaf-file-name="TCLocalStorageDatabase.java" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/rs/TCLocalStorageDatabase.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="39" column="43" selection-start="1056" selection-end="1064" vertical-scroll-proportion="0.35355148">
+                <state line="39" column="43" selection-start="1056" selection-end="1064" vertical-scroll-proportion="0.53502417">
                   <folding />
                 </state>
               </provider>
@@ -109,11 +109,13 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="RSTinCanOfflineConnector.java" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="RSTinCanOfflineConnector.java" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/rs/RSTinCanOfflineConnector.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="32" column="47" selection-start="1020" selection-end="1020" vertical-scroll-proportion="0.0">
-                  <folding />
+                <state line="740" column="56" selection-start="24115" selection-end="24115" vertical-scroll-proportion="0.7948718">
+                  <folding>
+                    <element signature="e#23451#23462#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -136,10 +138,19 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="TCOfflineStatementCollection.java" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="TCOfflineStatementCollection.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/rs/TCOfflineStatementCollection.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="152" column="66" selection-start="4971" selection-end="4971" vertical-scroll-proportion="0.07821229">
+                <state line="176" column="60" selection-start="6359" selection-end="6359" vertical-scroll-proportion="-16.76923">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="3" column="49" selection-start="168" selection-end="168" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
               </provider>
@@ -229,6 +240,16 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -277,16 +298,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="libs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -532,6 +543,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32869297" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32869297" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -542,7 +554,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946634" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32869297" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Android Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946634" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -622,11 +633,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="49" selection-start="168" selection-end="168" vertical-scroll-proportion="0.035545025" />
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/libs/tincan-0.3.1-SNAPSHOT-jar-with-dependencies-jarjar.jar!/com/rusticisoftware/tincan/RemoteLRS.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="38" column="47" selection-start="1776" selection-end="1785" vertical-scroll-proportion="0.3485342" />
@@ -649,11 +655,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/rs/RSTinCanOfflineConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="47" selection-start="1020" selection-end="1020" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/libs/tincan-0.3.1-SNAPSHOT-jar-with-dependencies-jarjar.jar!/com/rusticisoftware/tincan/json/StringOfJSON.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="11" selection-start="238" selection-end="238" vertical-scroll-proportion="0.0" />
@@ -664,10 +665,26 @@
         <state line="5" column="22" selection-start="177" selection-end="177" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="49" selection-start="168" selection-end="168" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/rs/TCOfflineStatementCollection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="152" column="66" selection-start="4971" selection-end="4971" vertical-scroll-proportion="0.07821229">
+        <state line="176" column="60" selection-start="6359" selection-end="6359" vertical-scroll-proportion="-16.76923">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/rs/RSTinCanOfflineConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="740" column="56" selection-start="24115" selection-end="24115" vertical-scroll-proportion="0.7948718">
+          <folding>
+            <element signature="e#23451#23462#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -727,6 +727,7 @@ public class RSTinCanOfflineConnector extends Activity {
             try
             {
                 Statement statementToSend = new Statement(new StringOfJSON(item.statementJson));
+                statementToSend.setId(UUID.fromString(item.statementId));
                 statementCollectionToSend.add(statementToSend);
                 _statementsToDelete.add(statementToSend);
 
@@ -744,6 +745,7 @@ public class RSTinCanOfflineConnector extends Activity {
                 {
                     Statement statementSent = _statementsToDelete.get(i);
                     statementQueue.markStatementPosted(statementSent);
+                    _statementsToDelete.remove(i);
                 }
                 sendInterface.completionBlock();
             }
