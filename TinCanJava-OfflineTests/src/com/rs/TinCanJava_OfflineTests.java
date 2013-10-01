@@ -64,8 +64,8 @@ public class TinCanJava_OfflineTests extends Activity {
     {
         Map<String,String> lrs = new HashMap<String, String>();
 
-        lrs.put("endpoint", "https://cloud.scorm.com/ScormEngineInterface/TCAPI/K5QNRA5J5J/sandbox/");
-        lrs.put("auth", "Basic SzVRTlJBNUo1Sjp2UFhLejBkd3pZM0gxQnEzZFIzVTNJc01DejBUN2Z5T0tVdE5TR3lm");
+        lrs.put("endpoint", "https://cloud.scorm.com/ScormEngineInterface/TCAPI/APPID/sandbox/");
+        lrs.put("auth", "Basic SzVRTlJBNUo1Sjp2UFhLejBkd3pZM0gxQnEzZFIzVTNJc01DejBUN2ZHgsyfhhGDhGGJsd3472364");
         lrs.put("version", "1.0.0");
 
         Map<String, Object> options = new HashMap<String, Object>();
@@ -144,8 +144,8 @@ public class TinCanJava_OfflineTests extends Activity {
     Statement createTestStatementWithOptions(Map<String,Object> options)
     {
         Agent actor = new Agent();
-        actor.setName("Brian Rogers");
-        actor.setMbox("mailto:brian@tincanapi.com");
+        actor.setName("Joe User");
+        actor.setMbox("mailto:joe.user@tincanapi.com");
 
         ActivityDefinition def = new ActivityDefinition();
 
@@ -193,8 +193,8 @@ public class TinCanJava_OfflineTests extends Activity {
     {
 
         Agent actor = new Agent();
-        actor.setName("Brian Rogers");
-        actor.setMbox("mailto:brian@tincanapi.com");
+        actor.setName("Joe User");
+        actor.setMbox("mailto:joe.user@tincanapi.com");
 
         Map<String,String> stateContents = new HashMap<String, String>();
         stateContents.put("bookmark", "page 1");
