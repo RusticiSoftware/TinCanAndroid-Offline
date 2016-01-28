@@ -372,7 +372,7 @@ public class RSTinCanOfflineConnector extends Activity {
      */
     public void getStateFromServerWithStateId(String stateId, String activityId, Agent agent, String registration, getStateInterface getInterface)
     {
-        new getStatementWithIdAsync().execute(stateId, activityId, agent, registration ,getInterface);
+        new getStateFromServerWithStateIdAsync().execute(stateId, activityId, agent, registration, getInterface);
     }
 
 
